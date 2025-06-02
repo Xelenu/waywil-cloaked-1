@@ -33,7 +33,7 @@
       errorMsg.textContent = '';
 
       try {
-        const res = await fetch('https://your-worker-url.workers.dev/', {
+        const res = await fetch('https://api.learnstats.xyz/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
@@ -43,7 +43,18 @@
 
         if (data.success && data.url) {
           const popup = window.open('about:blank');
-          popup.document.write(`<iframe src="${data.url}" style="border:none;width:100vw;height:100vh;"></iframe>`);
+          popup.document.write(`
+  <style>
+    html, body {
+      margin: 0; 
+      padding: 0; 
+      overflow: hidden; 
+      height: 100%; 
+      width: 100%;
+    }
+  </style>
+  <iframe src="${data.url}" style="border:none;width:100vw;height:100vh;"></iframe>
+`);
         } else {
           errorMsg.textContent = 'Invalid credentials';
         }
