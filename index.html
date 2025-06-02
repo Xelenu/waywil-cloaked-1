@@ -1,55 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LearnStats – Coming Soon</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon" />
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <title>LearnStats - Coming Soon</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fb;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 3em;
+      text-align: center;
+    }
+    p {
+      font-size: 1.5em;
+    }
+    .login-btn {
+      margin-top: 30px;
+      padding: 10px 25px;
+      font-size: 1em;
+      background-color: #2b6cb0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: white;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .overlay input {
+      padding: 10px;
+      margin: 10px;
+      font-size: 1em;
+      width: 250px;
+    }
+    .overlay button {
+      padding: 10px 20px;
+      font-size: 1em;
+      background-color: #3182ce;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    #error-msg {
+      color: red;
+      margin-top: 10px;
+    }
+    footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.9em;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
-  <header>
-    <div class="logo">
-      <img src="favicon.ico" alt="Graduation Cap" />
-      LearnStats
-    </div>
-    <a class="login-btn" onclick="openLogin()">Login</a>
-  </header>
+  <h1>LearnStats</h1>
+  <p>Coming soon to teachers and students!</p>
+  <button class="login-btn" onclick="showLogin()">Login</button>
 
-  <main>
-    <div>
-      <h1>Coming soon to teachers and students!</h1>
-    </div>
-  </main>
-
-  <footer>
-    © 2025 LearnStats. All rights reserved.
-  </footer>
-
-  <!-- Login Overlay -->
-  <div class="login-overlay" id="loginOverlay">
-    <div class="login-box">
-      <h2>Login</h2>
-      <input type="email" placeholder="Email" />
-      <input type="password" placeholder="Password" />
-      <button onclick="submitLogin()">Log In</button>
-      <div class="close-login" onclick="closeLogin()">Cancel</div>
-    </div>
+  <div class="overlay" id="loginOverlay">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="submitLogin()">Submit</button>
+    <div id="error-msg"></div>
   </div>
 
+  <footer>&copy; 2025 LearnStats. All rights reserved.</footer>
+
   <script>
-    function openLogin() {
+    function showLogin() {
       document.getElementById('loginOverlay').style.display = 'flex';
     }
 
-    function closeLogin() {
-      document.getElementById('loginOverlay').style.display = 'none';
-    }
+    async function submitLogin() {
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const errorMsg = document.getElementById('error-msg');
+      errorMsg.textContent = '';
 
-    function submitLogin() {
-      // Placeholder functionality
-      alert("Login submitted (not connected to a backend yet).");
-      closeLogin();
+      try {
+        const res = await fetch('https://your-worker-url.workers.dev/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+
+        if (data.success && data.url) {
+          const popup = window.open('about:blank');
+          popup.document.write(`<iframe src="${data.url}" style="border:none;width:100vw;height:100vh;"></iframe>`);
+        } else {
+          errorMsg.textContent = 'Invalid credentials';
+        }
+      } catch (e) {
+        errorMsg.textContent = 'Network error or bad response';
+      }
     }
   </script>
 </body>
