@@ -33,7 +33,7 @@
       errorMsg.textContent = '';
 
       try {
-        const res = await fetch('https://api.learnstats.xyz/', {
+        const res = await fetch('https://your-worker-url.workers.dev/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ username, password })
