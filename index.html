@@ -59,15 +59,76 @@
       font-size: 0.9rem;
       color: #6c757d;
     }
+
+    a.login-btn {
+      text-decoration: none;
+      color: #007bff;
+      cursor: pointer;
+    }
+
+    /* LOGIN OVERLAY */
+    .login-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .login-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      width: 300px;
+      text-align: center;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .login-box h2 {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 0.5rem;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .close-login {
+      margin-top: 1rem;
+      font-size: 0.85rem;
+      color: #007bff;
+      cursor: pointer;
+      display: inline-block;
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">
-      <img src="favicon.ico" alt="..." />
+      <img src="favicon.ico" alt="Graduation Cap" />
       LearnStats
     </div>
-    <div><a href="#" style="text-decoration:none;color:#007bff;">Login</a></div>
+    <a class="login-btn" onclick="openLogin()">Login</a>
   </header>
 
   <main>
@@ -79,5 +140,32 @@
   <footer>
     © 2025 LearnStats. All rights reserved.
   </footer>
+
+  <!-- Login Overlay -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+      <h2>Login</h2>
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <button onclick="submitLogin()">Log In</button>
+      <div class="close-login" onclick="closeLogin()">Cancel</div>
+    </div>
+  </div>
+
+  <script>
+    function openLogin() {
+      document.getElementById('loginOverlay').style.display = 'flex';
+    }
+
+    function closeLogin() {
+      document.getElementById('loginOverlay').style.display = 'none';
+    }
+
+    function submitLogin() {
+      // Placeholder functionality
+      alert("Login submitted (not connected to a backend yet).");
+      closeLogin();
+    }
+  </script>
 </body>
 </html>
