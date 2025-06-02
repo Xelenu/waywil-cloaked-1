@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>LearnStats - Coming Soon</title>
+  <title>LearnStats</title>
   <link rel="icon" type="image/png" href="favicon.png" />
   <style>
     body {
@@ -13,21 +13,29 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      height: 100vh;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
-    h1 {
-      font-size: 3em;
+    header {
       text-align: center;
+      margin-bottom: 30px;
     }
 
-    p {
-      font-size: 1.5em;
+    header h1 {
+      font-size: 3em;
+      margin-bottom: 10px;
+    }
+
+    header p.subtitle {
+      font-size: 1.2em;
+      color: #555;
     }
 
     .login-btn {
-      margin-top: 30px;
+      margin-top: 20px;
       padding: 10px 25px;
       font-size: 1em;
       background-color: #2b6cb0;
@@ -35,6 +43,59 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+    }
+
+    section.quotes {
+      max-width: 600px;
+      margin: 40px 0;
+    }
+
+    section.quotes blockquote {
+      font-style: italic;
+      color: #444;
+      margin: 20px 0;
+      padding-left: 20px;
+      border-left: 4px solid #2b6cb0;
+    }
+
+    section.quotes cite {
+      display: block;
+      text-align: right;
+      margin-top: 5px;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    section.images {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      max-width: 1000px;
+      margin-bottom: 50px;
+    }
+
+    .images .img-placeholder {
+      flex: 1 1 280px;
+      max-width: 320px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: #fff;
+    }
+
+    .images .img-placeholder img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .images .caption {
+      padding: 10px;
+      text-align: center;
+      font-size: 0.95em;
+      color: #555;
     }
 
     .overlay {
@@ -100,36 +161,63 @@
     #error-msg {
       color: red;
       margin-top: 10px;
-      min-height: 1.2em; /* reserve space */
+      min-height: 1.2em;
       font-size: 0.9em;
     }
 
     footer {
-      position: absolute;
-      bottom: 10px;
+      margin-top: auto;
       font-size: 0.9em;
       color: #888;
     }
   </style>
 </head>
 <body>
-  <h1>LearnStats</h1>
-  <p>Coming soon to teachers and students!</p>
-  <button class="login-btn" onclick="showLogin()">Login</button>
+  <header>
+    <h1>LearnStats</h1>
+    <p class="subtitle">Empowering teachers and students through data-driven insight.</p>
+    <button class="login-btn" onclick="showLogin()">Login</button>
+  </header>
 
-  <div class="overlay" id="loginOverlay">
-  <div class="overlay-content">
-    <img src="favicon.ico" alt="..." draggable=false />
-    <h2>Login</h2>
-    <p class="caption">Learn more about learning!</p>
-    <input type="text" id="username" placeholder="Username" />
-    <input type="password" id="password" placeholder="Password" />
-    <button onclick="submitLogin()">Submit</button>
-    <div id="error-msg"></div>
-  </div>
-</div>
+  <section class="quotes">
+    <blockquote>
+      “Education is the most powerful weapon which you can use to change the world.”
+      <cite>— Nelson Mandela</cite>
+    </blockquote>
+    <blockquote>
+      “Statistics are like bikinis. What they reveal is suggestive, but what they conceal is vital.”
+      <cite>— Aaron Levenstein</cite>
+    </blockquote>
+  </section>
+
+  <section class="images">
+    <div class="img-placeholder">
+      <img src="https://via.placeholder.com/300x200" alt="Placeholder 1" />
+      <div class="caption">Interactive Charts</div>
+    </div>
+    <div class="img-placeholder">
+      <img src="https://via.placeholder.com/300x200" alt="Placeholder 2" />
+      <div class="caption">Student Progress Dashboard</div>
+    </div>
+    <div class="img-placeholder">
+      <img src="https://via.placeholder.com/300x200" alt="Placeholder 3" />
+      <div class="caption">Teacher Collaboration Space</div>
+    </div>
+  </section>
 
   <footer>&copy; 2025 LearnStats. All rights reserved.</footer>
+
+  <div class="overlay" id="loginOverlay">
+    <div class="overlay-content">
+      <img src="favicon.png" alt="LearnStats Logo" draggable="false" />
+      <h2>Login</h2>
+      <p class="caption">Learn more about learning!</p>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="submitLogin()">Submit</button>
+      <div id="error-msg"></div>
+    </div>
+  </div>
 
   <script>
     function showLogin() {
