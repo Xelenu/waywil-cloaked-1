@@ -1,10 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>LearnStats - Coming Soon</title>
-  <link rel="icon" type="image/png" href="favicon.png">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f7fb;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    h1 {
+      font-size: 3em;
+      text-align: center;
+    }
+
+    p {
+      font-size: 1.5em;
+    }
+
+    .login-btn {
+      margin-top: 30px;
+      padding: 10px 25px;
+      font-size: 1em;
+      background-color: #2b6cb0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .overlay-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      max-width: 320px;
+      width: 90%;
+    }
+
+    .overlay-content img {
+      width: 80px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    .overlay-content h2 {
+      margin: 0;
+      font-size: 2em;
+      color: #333;
+    }
+
+    .overlay-content .caption {
+      margin: 10px 0 25px;
+      font-size: 1em;
+      color: #555;
+    }
+
+    .overlay-content input {
+      margin: 8px 0;
+      width: 250px;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .overlay-content button {
+      margin-top: 15px;
+      width: 100%;
+      padding: 10px;
+      background-color: #3182ce;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #error-msg {
+      color: red;
+      margin-top: 10px;
+      min-height: 1.2em; /* reserve space */
+      font-size: 0.9em;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      font-size: 0.9em;
+      color: #888;
+    }
+  </style>
 </head>
 <body>
   <h1>LearnStats</h1>
@@ -12,11 +118,15 @@
   <button class="login-btn" onclick="showLogin()">Login</button>
 
   <div class="overlay" id="loginOverlay">
-    <h2>Login</h2>
-    <input type="text" id="username" placeholder="Username">
-    <input type="password" id="password" placeholder="Password">
-    <button onclick="submitLogin()">Submit</button>
-    <div id="error-msg"></div>
+    <div class="overlay-content">
+      <img src="logo.png" alt="LearnStats Logo" />
+      <h2>Login</h2>
+      <p class="caption">Learn more about learning!</p>
+      <input type="text" id="username" placeholder="Username" />
+      <input type="password" id="password" placeholder="Password" />
+      <button onclick="submitLogin()">Submit</button>
+      <div id="error-msg"></div>
+    </div>
   </div>
 
   <footer>&copy; 2025 LearnStats. All rights reserved.</footer>
@@ -36,7 +146,7 @@
         const res = await fetch('https://api.learnstats.xyz/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ username, password })
+          body: JSON.stringify({ username, password }),
         });
 
         const data = await res.json();
@@ -46,10 +156,10 @@
           popup.document.write(`
   <style>
     html, body {
-      margin: 0; 
-      padding: 0; 
-      overflow: hidden; 
-      height: 100%; 
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      height: 100%;
       width: 100%;
     }
   </style>
